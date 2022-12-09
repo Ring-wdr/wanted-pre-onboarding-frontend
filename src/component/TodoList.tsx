@@ -1,4 +1,4 @@
-import { ITodo } from '../interface/ITodo';
+import { ITodo } from '../interface/todo/ITodo';
 import { Todo } from '../utils/api';
 import TodoListItem from './TodoListItem';
 

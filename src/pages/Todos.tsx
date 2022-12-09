@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Todo } from '../utils/api';
-import { ITodo } from '../interface/ITodo';
+import { ITodo } from '../interface/todo/ITodo';
 import TodoList from '../component/TodoList';
 
 const todoCtl = new Todo();

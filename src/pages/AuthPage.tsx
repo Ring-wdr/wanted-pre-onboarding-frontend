@@ -1,23 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { WantedAuth } from '../utils/api';
 
 const AuthPage = () => {
   const [email, setEmail] = useState<string>('');
   const [pw, setPw] = useState<string>('');
   const [disable, setDisable] = useState(true);
-  const buttonCtl = () => {
-    email.includes('@') && pw.length >= 8
-      ? setDisable(false)
-      : setDisable(true);
-  };
-  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const nav = useNavigate();
+
+  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
-    buttonCtl();
-  };
-  const changePw = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const changePw = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPw(e.target.value);
-    buttonCtl();
-  };
+
   const onSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // avoid blank on input
@@ -29,6 +27,8 @@ const AuthPage = () => {
     }
     try {
       await WantedAuth.signIn(email, pw);
+      alert('로그인되었습니다!');
+      if (localStorage.getItem('access_token')) return nav('/todos');
     } catch (err) {
       console.error(err);
     }
@@ -44,11 +44,20 @@ const AuthPage = () => {
     }
     try {
       await WantedAuth.signUp(email, pw);
-    } catch (err: any) {
-      const { message }: { message: string } = err.response.data;
-      alert(message);
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        const { message }: { message: string } = err.response?.data;
+        alert(message);
+      } else {
+        throw new Error('axios 에러가 아닙니다.');
+      }
     }
   };
+  useEffect(() => {
+    email.includes('@') && pw.length >= 8
+      ? setDisable(false)
+      : setDisable(true);
+  }, [email, pw]);
 
   return (
     <div>

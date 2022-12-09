@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { ITodo } from '../interface/ITodo';
+import { ITodo } from '../interface/todo/ITodo';
 import { Todo } from '../utils/api';
 
 interface ITodoListItem {

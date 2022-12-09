@@ -1,12 +1,7 @@
 import axios from 'axios';
-import { ITodo } from '../interface/ITodo';
+import { IAuth } from '../interface/auth/IAuth';
+import { ITodo } from '../interface/todo/ITodo';
 const HOST = process.env.REACT_APP_HOST;
-
-interface IAuth {
-  data: {
-    access_token: string;
-  };
-}
 
 export const WantedAuth = {
   signIn: async (email: string, password: string) => {
@@ -16,8 +11,11 @@ export const WantedAuth = {
     window.localStorage.setItem('access_token', access_token);
   },
   signUp: async (email: string, password: string) => {
-    const result = await axios.post(`${HOST}/auth/signup`, { email, password });
-    console.log(result);
+    const { statusText } = await axios.post(`${HOST}/auth/signup`, {
+      email,
+      password,
+    });
+    statusText === 'Created' && alert('정상 회원가입되었습니다.');
   },
 };
 
