@@ -1,24 +1,15 @@
 import { ITodo } from '../interface/todo/ITodo';
-import { Todo } from '../utils/api';
 import TodoListItem from './TodoListItem';
 
-interface TodoProps {
+interface Props {
   todos: ITodo[];
-  todoCtl: Todo;
-  setRefetch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TodoList = ({ todos, todoCtl, setRefetch }: TodoProps) => {
+const TodoList = ({ todos }: Props) => {
   return (
-    <div>
+    <div className='todoList'>
       {todos.length > 0
-        ? todos.map((todo) => (
-            <TodoListItem
-              todo={todo}
-              todoCtl={todoCtl}
-              setRefetch={setRefetch}
-            />
-          ))
+        ? todos.map((todo) => <TodoListItem key={todo.id} todo={todo} />)
         : null}
     </div>
   );

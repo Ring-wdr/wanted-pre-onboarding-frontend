@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
+import { RefetchProvider } from './hooks/useTodos';
 import Main from './pages/Main';
 import Todos from './pages/Todos';
 
@@ -8,7 +8,14 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Main />} />
-        <Route path='/todos' element={<Todos />} />
+        <Route
+          path='/todos'
+          element={
+            <RefetchProvider>
+              <Todos />
+            </RefetchProvider>
+          }
+        />
       </Routes>
     </Router>
   );

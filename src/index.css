@@ -3,6 +3,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  background-color: dodgerblue;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +11,52 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.todoPage {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.todoPage form {
+  margin-bottom: 20px;
+}
+
+.todoList {
+  margin: auto;
+  background-color: deeppink;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  width: 35rem;
+  height: 20rem;
+  scrollbar-width: none;
+  border-radius: 0.5rem;
+}
+.todoList::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.todo-item {
+  background-color: blanchedalmond;
+  width: 30rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.todo-item:first-child {
+  margin-top: 2rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.todo-item .todoFline {
+  display: flex;
+  justify-content: space-between;
 }
