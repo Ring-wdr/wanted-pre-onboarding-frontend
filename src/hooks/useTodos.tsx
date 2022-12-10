@@ -19,17 +19,16 @@ const iTodosContextState = {
   todoCtl,
 };
 
-const RefetchContext = createContext<TodosContextType>(iTodosContextState);
+const TodosContext = createContext<TodosContextType>(iTodosContextState);
 
-export function RefetchProvider({ children }: Props) {
+export function TodosProvider({ children }: Props) {
   const [refetch, setRefetch] = useState<boolean>(false);
   const refetcher = () => setRefetch((prev) => !prev);
-
   return (
-    <RefetchContext.Provider value={{ refetch, refetcher, todoCtl }}>
+    <TodosContext.Provider value={{ refetch, refetcher, todoCtl }}>
       {children}
-    </RefetchContext.Provider>
+    </TodosContext.Provider>
   );
 }
 
-export const useRefetch = () => useContext(RefetchContext);
+export const useTodos = () => useContext(TodosContext);

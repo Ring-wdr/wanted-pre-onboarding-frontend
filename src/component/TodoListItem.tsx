@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useRefetch } from '../hooks/useTodos';
+import { useTodos } from '../hooks/useTodos';
 import { ITodo } from '../interface/todo/ITodo';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 const TodoListItem = ({ todo }: Props) => {
   const [onModify, setToggle] = useState<boolean>(false);
   const todoRef = useRef<HTMLInputElement>(null);
-  const { refetcher, todoCtl } = useRefetch();
+  const { refetcher, todoCtl } = useTodos();
 
   const updateTodo = async (id: number, todo: string, isCompleted: boolean) => {
     await todoCtl.updateTodo(id, todo, isCompleted);

@@ -1,22 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { RefetchProvider } from './hooks/useTodos';
+import { TodosProvider } from './hooks/useTodos';
 import Main from './pages/Main';
-import Todos from './pages/Todos';
+import Todo from './pages/Todo';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path='/' element={<Main />} />
-        <Route
-          path='/todos'
-          element={
-            <RefetchProvider>
-              <Todos />
-            </RefetchProvider>
-          }
-        />
-      </Routes>
+      <TodosProvider>
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/todos' element={<Todo />} />
+        </Routes>
+      </TodosProvider>
     </Router>
   );
 }

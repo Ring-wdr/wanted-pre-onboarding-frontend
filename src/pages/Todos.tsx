@@ -1,26 +1,34 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { ITodo } from '../interface/todo/ITodo';
 import TodoList from '../component/TodoList';
-import { useRefetch } from '../hooks/useTodos';
+import { useTodos } from '../hooks/useTodos';
 
 const Todos = () => {
-  const { refetch, refetcher, todoCtl } = useRefetch();
+  const {
+    refetch,
+    refetcher,
+    todoCtl: { reloadToken, getTodos, createTodo },
+  } = useTodos();
   const newTodoRef = useRef<HTMLInputElement>(null);
   const [todos, setTodos] = useState<ITodo[]>([]);
 
   const submitTodo = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (newTodoRef.current) {
-      await todoCtl.createTodo(newTodoRef.current.value);
+      await createTodo(newTodoRef.current.value);
       refetcher();
     }
   };
+
+  useLayoutEffect(() => {
+    reloadToken();
+  }, []);
 
   useEffect(() => {
     const ctl = new AbortController();
     const { signal } = ctl;
     (async () => {
-      const result = await todoCtl.getTodos(signal);
+      const result = await getTodos(signal);
       setTodos(result);
     })();
     return () => ctl.abort();

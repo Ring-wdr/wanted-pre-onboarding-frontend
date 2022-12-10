@@ -13,6 +13,19 @@ code {
     monospace;
 }
 
+.login {
+  margin-top: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login .sign-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
 .todoPage {
   margin: auto;
   display: flex;
