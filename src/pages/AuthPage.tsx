@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { WantedAuth } from '../utils/api';
 import { useInput } from '../hooks/useInput';
 
 const AuthPage = () => {
@@ -13,7 +12,7 @@ const AuthPage = () => {
   const onSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    await WantedAuth.signIn(email, pw);
+    await import('../utils/sign').then(({ signIn }) => signIn(email, pw));
     if (localStorage.getItem('access_token')) {
       alert('로그인되었습니다!');
       return nav('/todos');
@@ -21,7 +20,8 @@ const AuthPage = () => {
   };
   const onSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    await WantedAuth.signUp(email, pw);
+
+    await import('../utils/sign').then(({ signUp }) => signUp(email, pw));
   };
   useEffect(
     () =>
