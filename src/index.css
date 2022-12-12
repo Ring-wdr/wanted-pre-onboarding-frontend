@@ -21,9 +21,43 @@ code {
   align-items: center;
 }
 
-.login .sign-btn {
+.login .logo-box {
   display: flex;
-  justify-content: space-between;
+  width: 10rem;
+  height: 7.5rem;
+  margin-bottom: 2rem;
+}
+
+.login .logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login form .sign-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login form .sign-btn button {
+  border-radius: 3px;
+  border: blueviolet 2px solid;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 40%;
+}
+
+.login form .sign-btn button:hover {
+  transition: 0.5s;
+  background-color: aquamarine;
 }
 
 .todoPage {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { InputBox } from '../component/InputBox';
 import { useInput } from '../hooks/useInput';
 
 const AuthPage = () => {
@@ -33,24 +34,22 @@ const AuthPage = () => {
 
   return (
     <div className='login'>
-      <h2>SignUp/SignIn Page</h2>
+      <div className='logo-box'>
+        <img src={`${process.env.PUBLIC_URL}/wanted_logo.png`} alt='logo' />
+      </div>
       <form>
-        <div>
-          <input
-            type='text'
-            value={email}
-            onChange={changeEmail}
-            placeholder='put email'
-          />
-        </div>
-        <div>
-          <input
-            type='password'
-            value={pw}
-            onChange={changePw}
-            placeholder='put password'
-          />
-        </div>
+        <InputBox
+          type='text'
+          value={email}
+          onChange={changeEmail}
+          placeholder='email'
+        />
+        <InputBox
+          type='password'
+          value={pw}
+          onChange={changePw}
+          placeholder='password'
+        />
         <div className='sign-btn'>
           <button disabled={disable} onClick={onSignIn}>
             로그인
