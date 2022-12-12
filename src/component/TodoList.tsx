@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { ITodo } from '../interface/todo/ITodo';
 import TodoListItem from './TodoListItem';
 
@@ -15,4 +16,6 @@ const TodoList = ({ todos }: Props) => {
   );
 };
 
-export default TodoList;
+const memoedTodo = memo(TodoList);
+
+export default memoedTodo;

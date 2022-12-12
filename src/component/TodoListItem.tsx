@@ -23,8 +23,33 @@ const TodoListItem = ({ todo }: Props) => {
 
   return (
     <div key={todo.id} className='todo-item'>
-      <div className='todoFline'>
-        <span>{todo.todo}</span>
+      <div className='todo-line'>
+        <div>
+          <div className={onModify ? '' : 'modify'} hidden={!onModify}>
+            <input
+              type='text'
+              ref={todoRef}
+              placeholder='수정 사항을 입력하세요'
+            />
+            <button
+              onClick={async () => {
+                if (todoRef.current) {
+                  await updateTodo(
+                    todo.id,
+                    todoRef.current?.value,
+                    todo.isCompleted
+                  );
+                  setToggle((prev) => !prev);
+                }
+              }}
+            >
+              수정
+            </button>
+          </div>
+          <div className={onModify ? 'modify' : ''} hidden={onModify}>
+            <div>{todo.todo}</div>
+          </div>
+        </div>
         <div>
           <label>
             <input
@@ -34,36 +59,16 @@ const TodoListItem = ({ todo }: Props) => {
             ></input>
             ✅
           </label>
-          <button onClick={() => setToggle((prev) => !prev)}>
+          <button
+            onClick={() => {
+              setToggle((prev) => !prev);
+              if (todoRef.current) todoRef.current.value = todo.todo;
+            }}
+          >
             {onModify ? ' 취소' : '수정'}
           </button>
           <button onClick={() => deleteTodo(todo.id)}> 삭제</button>
         </div>
-      </div>
-      <div>
-        {onModify ? (
-          <input
-            type='text'
-            ref={todoRef}
-            placeholder='수정 사항을 입력하세요'
-          />
-        ) : null}
-        {onModify ? (
-          <button
-            onClick={async () => {
-              if (todoRef.current) {
-                await updateTodo(
-                  todo.id,
-                  todoRef.current?.value,
-                  todo.isCompleted
-                );
-                setToggle((prev) => !prev);
-              }
-            }}
-          >
-            수정
-          </button>
-        ) : null}
       </div>
     </div>
   );

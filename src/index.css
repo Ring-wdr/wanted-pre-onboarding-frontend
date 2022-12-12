@@ -6,6 +6,7 @@ body {
   background-color: dodgerblue;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: medium;
 }
 
 code {
@@ -73,7 +74,7 @@ code {
 
 .todoList {
   margin: auto;
-  background-color: deeppink;
+  background-color: black;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -82,7 +83,9 @@ code {
   width: 35rem;
   height: 20rem;
   scrollbar-width: none;
-  border-radius: 0.5rem;
+  border: gray 20px solid;
+  border-left: gray 30px solid;
+  border-radius: 2rem;
 }
 .todoList::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
@@ -103,7 +106,17 @@ code {
   border-top-right-radius: 1rem;
 }
 
-.todo-item .todoFline {
+.todo-item .todo-line {
   display: flex;
   justify-content: space-between;
+}
+
+.todo-item .todo-line div .modify {
+  visibility: hidden;
+}
+
+.todo-item .todo-line div div input {
+  background-color: bisque;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }
